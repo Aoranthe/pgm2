@@ -37,6 +37,10 @@ int main (int argc, char **argv)
         }
     }
      
+    if (entrada==NULL) //para os casos onde nao foi dado a opção -i 
+        entrada=stdin;
+    if (saida==NULL) //para os casos onde nao foi dado a opção -o
+        saida=stdout;
 
     img_pgm *img=malloc(sizeof(img_pgm)); //aloca um espaço de memoria para a matriz que ira receber a imagem
     parametros(img,entrada); //funcao que salva os parametros da imagem
