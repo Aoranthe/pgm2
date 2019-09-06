@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 //funcao que obtem os valores da imagem
-int parametros(img_pgm *img, char *nome);
+void parametros(img_pgm *img, char *nome);
 //funcao que verifica se a img nao é nula
 void verifica (FILE *pgm);
 //funcao que aloca o tamanho da matriz

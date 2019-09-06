@@ -9,13 +9,13 @@
 #define max 1024
 
 
-int parametros(img_pgm *img, char *nome)
+void parametros(img_pgm *img, char *nome)
 {
     /*ver como vai ficar o nome do aquivo na hora de abrir*/    
     FILE *pgm=fopen(nome,"r+");
     verifica(pgm); 
     ignora_comentario(pgm);
-    fscanf(pgm,"%s\n",&img->tipo);
+    fscanf(pgm,"%s\n",img->tipo);
     ignora_comentario(pgm);
     fscanf(pgm,"%i %i\n", &img->coluna, &img->linha);
     ignora_comentario(pgm);
@@ -32,11 +32,12 @@ void verifica (FILE *pgm)
     { 
             printf("Erro, formado invalido!\n");//caso exista algum erro na leitura da imagem
             exit(1); //sai da funcao para nao fazer mais coisas
-        }
+    }
 }
 
 
-img_pgm  *aloca (img_pgm *img, FILE *pgm){
+img_pgm  *aloca (img_pgm *img, FILE *pgm)
+{
     img->matriz = calloc( img->linha * img->coluna, sizeof(unsigned int));
     
     for (int i=0; i<img->linha;i++)

@@ -20,7 +20,7 @@ int main (int argc, char **argv)
     char *entrada=NULL;
     char *saida=NULL;
     
-    while(option=getopt(argc,argv,"i:o:")!= -1)
+    while((option=getopt(argc,argv,"i:o:")) > 0)
     {
         switch (option)
         {
