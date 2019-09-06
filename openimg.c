@@ -11,8 +11,11 @@
 
 void parametros(img_pgm *img, char *nome)
 {
-    /*ver como vai ficar o nome do aquivo na hora de abrir*/    
-    FILE *pgm=fopen(nome,"r+");
+    FILE *pgm;
+    if (nome==NULL)
+        pgm=stdin;
+    else
+        pgm=fopen(nome,"r+");
     verifica(pgm); 
     ignora_comentario(pgm);
     fscanf(pgm,"%s\n",img->tipo);
@@ -56,8 +59,11 @@ void libera_matriz(img_pgm *img)
 /*aqui vai usar um valor que eu pego da linha de comando*/
 void escreve_img (img_pgm *img, char *saida)
 {
-    
-    FILE *pgm=fopen(saida,"w+"); //abro a imagem e salva em *pgm
+    FILE *pgm;
+    if (saida==NULL) //para caso nao tenha um nome no -o
+        pgm=stdout;
+    else
+        pgm=fopen(saida,"w+"); //abro a imagem e salva em *pgm
     fprintf(pgm,"%s\n",img->tipo); 
     fprintf(pgm,"%i %i\n", img->coluna, img->linha);
     fprintf(pgm,"%u \n",img->cinza);

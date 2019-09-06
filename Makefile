@@ -1,13 +1,14 @@
 CC=gcc
 CFLAGS=-g -Wall -lm
+OBJ1= pgmnega.o openimg.o
 OBJ = pgmmediana.o openimg.o
 
 %.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS) 
 
-all: main
+all: nega
 
-main: $(OBJ)
+nega: $(OBJ1)
 
 	$(CC) -o $@ $^ $(CFLAGS) 
 
@@ -19,4 +20,4 @@ clean:
 
 purge: 
 
-	rm main
+	rm nega
