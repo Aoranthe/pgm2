@@ -64,7 +64,7 @@ void escreve_img (img_pgm *img, char *saida)
         pgm=stdout;
     else
         pgm=fopen(saida,"w+"); //abro a imagem e salva em *pgm
-    fprintf(pgm,"%s\n",img->tipo); 
+    fprintf(pgm,"P%s\n",img->tipo); 
     fprintf(pgm,"%i %i\n", img->coluna, img->linha);
     fprintf(pgm,"%u \n",img->cinza);
     for (int i=0; i<img->linha; i++)
