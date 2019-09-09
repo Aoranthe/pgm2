@@ -17,13 +17,13 @@ void parametros(img_pgm *img, char *nome)
     else
         pgm=fopen(nome,"r+");
     verifica(pgm); 
-    ignora_comentario(pgm);
+    //ignora_comentario(pgm);
     fscanf(pgm,"%s\n",img->tipo);
-    ignora_comentario(pgm);
+    //ignora_comentario(pgm);
     fscanf(pgm,"%i %i\n", &img->coluna, &img->linha);
-    ignora_comentario(pgm);
+    //ignora_comentario(pgm);
     fscanf(pgm,"%i\n",&img->cinza);
-    ignora_comentario(pgm);
+    //ignora_comentario(pgm);
     img=aloca(img,pgm);
     fclose(pgm);
 }   
@@ -64,7 +64,7 @@ void escreve_img (img_pgm *img, char *saida)
         pgm=stdout;
     else
         pgm=fopen(saida,"w+"); //abro a imagem e salva em *pgm
-    fprintf(pgm,"P%s\n",img->tipo); 
+    fprintf(pgm,"%s\n",img->tipo); 
     fprintf(pgm,"%i %i\n", img->coluna, img->linha);
     fprintf(pgm,"%u \n",img->cinza);
     for (int i=0; i<img->linha; i++)

@@ -7,7 +7,7 @@
 
 typedef struct img_pgm
 {
-	char tipo[2];
+	char tipo[3];
 	unsigned int linha;
 	unsigned int coluna;
 	unsigned int cinza;
