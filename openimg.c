@@ -17,13 +17,13 @@ void parametros(img_pgm *img, char *nome)
     else
         pgm=fopen(nome,"r+");
     verifica(pgm); 
-    //ignora_comentario(pgm);
+    ignora_comentario(pgm);
     fscanf(pgm,"%s\n",img->tipo);
-    //ignora_comentario(pgm);
+    ignora_comentario(pgm);
     fscanf(pgm,"%i %i\n", &img->coluna, &img->linha);
-    //ignora_comentario(pgm);
+    ignora_comentario(pgm);
     fscanf(pgm,"%i\n",&img->cinza);
-    //ignora_comentario(pgm);
+    ignora_comentario(pgm);
     img=aloca(img,pgm);
     fclose(pgm);
 }   
@@ -75,9 +75,15 @@ void escreve_img (img_pgm *img, char *saida)
 void ignora_comentario(FILE *pgm)
 {
     char lixo;
-    lixo=getc(pgm); //recebe um caracter da imagem 
-    if (lixo == '#') //compara para saber se é um comentario
-        while (lixo != '\n') //se for percorre ate o fim da linha
-            lixo=getc(pgm);
+    lixo=fgetc(pgm); //recebe um caracter da imagem 
+    do
+    { 
+        if (lixo == '#') //compara para saber se é um comentario
+            while (lixo != '\n') //se for percorre ate o fim da linha
+                lixo=getc(pgm);
+        else ungetc(lixo,pgm); //se nao é um comentario devolve o valor lido
+            lixo=fgetc(pgm); //le um novo valor
+    }   while (lixo=='#');
+    ungetc(lixo,pgm); //devolve o ultimo lido
           
 }
