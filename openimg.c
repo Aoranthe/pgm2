@@ -41,6 +41,8 @@ void verifica (FILE *pgm)
 
 img_pgm  *aloca (img_pgm *img, FILE *pgm)
 {
+ /*FALTA FAZER A PARTE QUE LE O TIPO P5*/
+
     img->matriz = calloc( img->linha * img->coluna, sizeof(unsigned int));
     
     for (int i=0; i<img->linha;i++)

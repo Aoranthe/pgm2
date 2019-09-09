@@ -1,15 +1,22 @@
 CC=gcc
 CFLAGS=-g -Wall -lm
-OBJ1= pgmnega.o openimg.o
-OBJ = pgmmediana.o openimg.o
+
+nega = pgmnega.o openimg.o
+mediana = pgmmediana.o openimg.o
+rota = pgmrot.o openimg.o
 
 %.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS) 
 
-all: nega
+all: pgmmediana pgmrotacao pgmnegativo
 
-nega: $(OBJ1)
+pgmnegativo: $(nega)
+	$(CC) -o $@ $^ $(CFLAGS) 
 
+pgmmediana: $(mediana)
+	$(CC) -o $@ $^ $(CFLAGS) 
+
+pgmrotacao: $(rota)
 	$(CC) -o $@ $^ $(CFLAGS) 
 
 .PHONY:	clean
@@ -20,4 +27,4 @@ clean:
 
 purge: 
 
-	rm nega
+	rm pgmrotacao pgmnegativo pgmmediana
