@@ -44,11 +44,23 @@ img_pgm  *aloca (img_pgm *img, FILE *pgm)
  /*FALTA FAZER A PARTE QUE LE O TIPO P5*/
 
     img->matriz = calloc( img->linha * img->coluna, sizeof(unsigned int));
-    
-    for (int i=0; i<img->linha;i++)
-        for (int j=0; j<img->coluna;j++)
+    if (img->tipo[2]==2)    
+    {
+        for (int i=0; i<img->linha;i++)
+        for (int j=0; j<img->coluna;j++) //caso seja p2 apenas lê um int
             fscanf(pgm,"%u", &img->matriz[(i*img->coluna)+j]);
+    }
+    else
+    {
+        char pixel;
+        for (int i=0; i<img->linha;i++)
+        for (int j=0; j<img->coluna;j++)
+            {
+                fscanf(pgm,"%c", pixel); //caso seja formato p5, le um char e salva como um int
+                img->matriz[(i*img->coluna)+j]=pixel; //matriz recebe o valor do char lido
+            }
 
+    }
     return img;
 }
 
@@ -69,6 +81,7 @@ void escreve_img (img_pgm *img, char *saida)
     fprintf(pgm,"%s\n",img->tipo); 
     fprintf(pgm,"%i %i\n", img->coluna, img->linha);
     fprintf(pgm,"%u \n",img->cinza);
+    
     for (int i=0; i<img->linha; i++)
         for (int j=0; j<img->coluna; j++)
             fprintf(pgm, "%i ", img->matriz[(i*img->coluna) + j]);
@@ -83,6 +96,7 @@ void ignora_comentario(FILE *pgm)
         if (lixo == '#') //compara para saber se é um comentario
             while (lixo != '\n') //se for percorre ate o fim da linha
                 lixo=getc(pgm);
+
         else ungetc(lixo,pgm); //se nao é um comentario devolve o valor lido
             lixo=fgetc(pgm); //le um novo valor
     }   while (lixo=='#');
