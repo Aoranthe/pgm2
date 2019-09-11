@@ -19,10 +19,13 @@ void parametros(img_pgm *img, char *nome)
     verifica(pgm); 
     ignora_comentario(pgm);
     fscanf(pgm,"%s\n",img->tipo);
+
     ignora_comentario(pgm);
     fscanf(pgm,"%i %i\n", &img->coluna, &img->linha);
+
     ignora_comentario(pgm);
     fscanf(pgm,"%i\n",&img->cinza);
+    
     ignora_comentario(pgm);
     img=aloca(img,pgm);
     fclose(pgm);
@@ -46,7 +49,6 @@ img_pgm  *aloca (img_pgm *img, FILE *pgm)
     img->matriz = calloc( img->linha * img->coluna, sizeof(int));
     if (img->tipo[1]=='2')    
     {
-        
         for (int i=0; i<img->linha;i++)
         for (int j=0; j<img->coluna;j++) //caso seja p2 apenas lê um int
             fscanf(pgm,"%i", &img->matriz[(i*img->coluna)+j]);
