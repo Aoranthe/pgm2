@@ -43,24 +43,27 @@ img_pgm  *aloca (img_pgm *img, FILE *pgm)
 {
  /*FALTA FAZER A PARTE QUE LE O TIPO P5*/
 
-    img->matriz = calloc( img->linha * img->coluna, sizeof(unsigned int));
+    img->matriz = malloc(img->linha * img->coluna * sizeof(int));
     if (img->tipo[2]==2)    
     {
         for (int i=0; i<img->linha;i++)
         for (int j=0; j<img->coluna;j++) //caso seja p2 apenas lê um int
-            fscanf(pgm,"%u", &img->matriz[(i*img->coluna)+j]);
+            fscanf(pgm,"%i", &img->matriz[(i*img->coluna)+j]);
     }
     else
     {
         char pixel;
         for (int i=0; i<img->linha;i++)
         for (int j=0; j<img->coluna;j++)
-            {
-                fscanf(pgm,"%c", pixel); //caso seja formato p5, le um char e salva como um int
-                img->matriz[(i*img->coluna)+j]=pixel; //matriz recebe o valor do char lido
-            }
-
+        {
+            fscanf(pgm,"%c", &pixel); //caso seja formato p5, le um char e salva como um int
+            img->matriz[(i*img->coluna)+j]=pixel; //matriz recebe o valor do char lido
+        }
     }
+    for (int i=0; i<img->linha;i++)
+        for (int j=0; j<img->coluna;j++)
+         printf("%i ", img->matriz[(i*img->coluna)+j]);
+
     return img;
 }
 
@@ -80,7 +83,7 @@ void escreve_img (img_pgm *img, char *saida)
         pgm=fopen(saida,"w+"); //abro a imagem e salva em *pgm
     fprintf(pgm,"%s\n",img->tipo); 
     fprintf(pgm,"%i %i\n", img->coluna, img->linha);
-    fprintf(pgm,"%u \n",img->cinza);
+    fprintf(pgm,"%i \n",img->cinza);
     
     for (int i=0; i<img->linha; i++)
         for (int j=0; j<img->coluna; j++)

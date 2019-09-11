@@ -8,10 +8,10 @@
 typedef struct img_pgm
 {
 	char tipo[3];
-	unsigned int linha;
-	unsigned int coluna;
-	unsigned int cinza;
-	unsigned int *matriz;
+	int linha;
+	int coluna;
+	int cinza;
+	int *matriz;
 }img_pgm;
 
 
