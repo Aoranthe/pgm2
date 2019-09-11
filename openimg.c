@@ -33,7 +33,7 @@ void verifica (FILE *pgm)
 {
     if (pgm==NULL)
     { 
-            printf("Erro, formado invalido!\n");//caso exista algum erro na leitura da imagem
+            printf("Erro, formato invalido!\n");//caso exista algum erro na leitura da imagem
             exit(1); //sai da funcao para nao fazer mais coisas
     }
 }
@@ -43,12 +43,14 @@ img_pgm  *aloca (img_pgm *img, FILE *pgm)
 {
  /*FALTA FAZER A PARTE QUE LE O TIPO P5*/
 
-    img->matriz = malloc(img->linha * img->coluna * sizeof(int));
-    if (img->tipo[2]==2)    
+    img->matriz = calloc( img->linha * img->coluna, sizeof(int));
+    if (img->tipo[1]=='2')    
     {
+        
         for (int i=0; i<img->linha;i++)
         for (int j=0; j<img->coluna;j++) //caso seja p2 apenas lê um int
             fscanf(pgm,"%i", &img->matriz[(i*img->coluna)+j]);
+      
     }
     else
     {
@@ -60,9 +62,7 @@ img_pgm  *aloca (img_pgm *img, FILE *pgm)
             img->matriz[(i*img->coluna)+j]=pixel; //matriz recebe o valor do char lido
         }
     }
-    for (int i=0; i<img->linha;i++)
-        for (int j=0; j<img->coluna;j++)
-         printf("%i ", img->matriz[(i*img->coluna)+j]);
+        
 
     return img;
 }

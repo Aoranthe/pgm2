@@ -2,18 +2,15 @@ CC=gcc
 CFLAGS=-g -Wall -lm
 
 nega = pgmnega.o openimg.o
-mediana = pgmmediana.o openimg.o
+
 rota = pgmrot.o openimg.o
 
 %.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS) 
 
-all: pgmmediana pgmrotacao pgmnegativo
+all: pgmrotacao pgmnega
 
-pgmnegativo: $(nega)
-	$(CC) -o $@ $^ $(CFLAGS) 
-
-pgmmediana: $(mediana)
+pgmnega: $(nega)
 	$(CC) -o $@ $^ $(CFLAGS) 
 
 pgmrotacao: $(rota)
@@ -27,4 +24,4 @@ clean:
 
 purge: 
 
-	rm pgmrotacao pgmnegativo pgmmediana
+	rm pgmrotacao pgmnega 
