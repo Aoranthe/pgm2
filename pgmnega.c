@@ -14,7 +14,7 @@
  
 int main (int argc, char **argv)
 {
-    //jeito de abrir a imagem ainda esta errado
+   
     int option; 
     
     char *entrada=NULL;
