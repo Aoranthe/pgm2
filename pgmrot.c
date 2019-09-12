@@ -44,3 +44,6 @@ int main ()
 	escreve_img(img);
     libera_matriz(img);
 }
+
+
+/************FUNCAO QUE CALCULA O ANGULO*****************/
