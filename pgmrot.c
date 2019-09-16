@@ -7,10 +7,15 @@
 #include "pgmrot.h"
 #include <math.h>
 #include "openimg.h"
+#include <getopt.h>
+#include <ctype.h>
+#include <stdio.h>
+#include <unistd.h>
 
-int main ()
+int main ( int argc, char **argv)
 {	
-	int option, angulo;     
+	int option, angulo;
+	// int *angulo=NULL;     
 	char *entrada=NULL;
 	char *saida=NULL;	
 	
@@ -28,20 +33,25 @@ int main ()
 	        break;
 
 			case 'a': 
-				angulo=atoi(optarg); //converte por sera necessario ser tratado como int
+				{	//caso n seja passado um valor
+					if (optarg==NULL)
+						angulo=90; 
+					 
+					else //converte para ser tratado como int
+						angulo=atoi(optarg);
+				}
 			default:
 				fprintf(stderr, "valor invalido ou numero de parametros incorreto");
 				return -1;
 	    }
 	}
-	if(angulo==NULL) //para caso não seja passado um valor para o angulo
-		angulo=90;
+
     img_pgm *img=malloc(sizeof(img_pgm));
-    parametros(img);
+    parametros(img,entrada);
  
 	/*FAZER TODAS AS FUNÇÕES RELACIONADAS A ANGULOS*/
     
-	escreve_img(img);
+	escreve_img(img,saida);
     libera_matriz(img);
 }
 

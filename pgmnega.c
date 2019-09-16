@@ -51,5 +51,4 @@ void inverte_img(img_pgm *img)
                 int x=img->matriz[(i*img->coluna)+j];
                 img->matriz[(i*img->coluna)+j]= img->cinza - x;
             }
-
 }

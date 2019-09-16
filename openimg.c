@@ -44,8 +44,7 @@ void verifica (FILE *pgm)
 
 img_pgm  *aloca (img_pgm *img, FILE *pgm)
 {
- /*FALTA FAZER A PARTE QUE LE O TIPO P5*/
-
+    // aloca um espaço de memoria para a matriz
     img->matriz = calloc( img->linha * img->coluna, sizeof(int));
     if (img->tipo[1]=='2')    
     {
@@ -56,10 +55,10 @@ img_pgm  *aloca (img_pgm *img, FILE *pgm)
     }
     else
     {
-        char pixel;
+        // char pixel;
         for (int i=0; i<img->linha;i++)
         for (int j=0; j<img->coluna;j++)
-        { //caso n de dessa forma tentar com fgetc
+        { //caso n de dessa forma tentar com fgetc e fputc
             // fscanf(pgm,"%c", &pixel); //caso seja formato p5, le um char e salva como um int
             img->matriz[(i*img->coluna)+j]=fgetc(pgm); //matriz recebe o valor do char lido
         }
