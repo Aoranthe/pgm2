@@ -55,11 +55,9 @@ img_pgm  *aloca (img_pgm *img, FILE *pgm)
     }
     else
     {
-        // char pixel;
         for (int i=0; i<img->linha;i++)
         for (int j=0; j<img->coluna;j++)
         { //caso n de dessa forma tentar com fgetc e fputc
-            // fscanf(pgm,"%c", &pixel); //caso seja formato p5, le um char e salva como um int
             img->matriz[(i*img->coluna)+j]=fgetc(pgm); //matriz recebe o valor do char lido
         }
     }

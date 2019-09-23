@@ -11,7 +11,9 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <unistd.h>
- 
+#define max 9
+#define lin 3
+
 int main (int argc, char **argv)
 {
    
@@ -56,12 +58,12 @@ int verifica_valor(int a, int b)
 
 void efeito(img_pgm *img)
 {
-    int j, i, col, lin;
+    int j, i, coluna, linha;
     // passar por toda a matriz de 1 até tam-1 chamando a funcao calculo
-    lin=img->linha;
-    col=img->coluna;
-    for (i=1; i< (lin - 1); i++)
-    for (j=1; j< (col - 1); j++)
+    linha=img->linha;
+    coluna=img->coluna;
+    for (i=1; i< (linha - 1); i++)
+    for (j=1; j< (coluna - 1); j++)
     {
         calculo(i,j, img);
     }
@@ -70,28 +72,6 @@ void efeito(img_pgm *img)
 
 void calculo(int indiceI, int indiceJ, img_pgm *img)
 {
-    // variaveis utilizadas
-    int col=img->coluna;
-    int i,j;
-
-    // matriz contera os valores com 0 e 1
-    int matriz=malloc( 9* sizeof(int));
     
-    int matriz2=malloc( 9* sizeof(int));
-
-    // valor do meio da matriz original
-    int meio=img->matriz[(indiceI * img->coluna) + indiceJ];
-
-
-    for (i=0; i < 3; i++)
-    for (j=0; j < 3; j++)
-    {
-        //essa matriz recebe os 0 e 1
-        matriz[(i * 3) + j]=verifica_valor(img->matriz[(indiceI * col) + indiceJ], meio);
-    }
-
-
-    free(matriz);
-    free(matriz2);
-
+    
 }
