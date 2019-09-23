@@ -75,28 +75,23 @@ void calculo(int indiceI, int indiceJ, img_pgm *img)
     int i,j;
 
     // matriz contera os valores com 0 e 1
-    int matriz=(int *)malloc( 9* sizeof(int));
+    int matriz=malloc( 9* sizeof(int));
     
-    // int matriz2=(int *)malloc( 9* sizeof(int));
+    int matriz2=malloc( 9* sizeof(int));
 
-    // valor do meio da matriz 3x3
+    // valor do meio da matriz original
     int meio=img->matriz[(indiceI * img->coluna) + indiceJ];
 
-    // for (i=(indiceI -1) ; i<(indiceI +1) ; i++)
-    // for (j=(indiceJ -1) ; j<(indiceJ +1) ; j++)
-    // {
-        // fazer a subtração aqui e gerar 
-    //    uma nova matriz para fazer os calculos
-        // if (img->matriz[(i * col) + j] != meio)
-        // {        
-            // matriz[(i * 3) + j]=verifica_valor(img->matriz[(i * col) + j], meio);
-// 
-        // }
-// 
-    // }
+
+    for (i=0; i < 3; i++)
+    for (j=0; j < 3; j++)
+    {
+        //essa matriz recebe os 0 e 1
+        matriz[(i * 3) + j]=verifica_valor(img->matriz[(indiceI * col) + indiceJ], meio);
+    }
 
 
     free(matriz);
-    // free(matriz2);
+    free(matriz2);
 
 }
