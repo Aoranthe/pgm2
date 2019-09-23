@@ -56,19 +56,27 @@ int verifica_valor(int a, int b)
 
 void efeito(img_pgm *img)
 {
+    int j, i, col, lin;
     // passar por toda a matriz de 1 até tam-1 chamando a funcao calculo
+    lin=img->linha;
+    col=img->coluna;
+    for (i=1; i< (lin - 1); i++)
+    for (j=1; j< (col - 1); j++)
+    {
+        calculo(i,j, img);
+    }
 
 }
 
-void calculo(int indice, img_pgm *img)
+void calculo(int indiceI, int indeceJ, img_pgm *img)
 {
     // alocacao para um espaço onde
     //  serão calculados os efeitos
     int matriz=(int *)malloc( 9* sizeof(int));
-    int matriz2=(int *)malloc( 9* sizeof(int));
+    // int matriz2=(int *)malloc( 9* sizeof(int));
     
     int i,j;
-    for (i=(indice -1); i<(indice +1) ; i++)
+    // for (i=(indice -1); i<(indice +1) ; i++)
     {
         //fazer a subtração aqui e gerar 
         // uma nova matriz para fazer os calculos
@@ -77,6 +85,6 @@ void calculo(int indice, img_pgm *img)
 
 
     free(matriz);
-    free(matriz2);
+    // free(matriz2);
 
 }
