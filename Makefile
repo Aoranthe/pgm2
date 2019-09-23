@@ -5,6 +5,10 @@ nega = pgmnega.o openimg.o
 
 rota = pgmrot.o openimg.o
 
+lbp = pgmlbp.o openimg.o
+
+
+
 %.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS) 
 
@@ -12,6 +16,9 @@ all: pgmrotacao pgmnega
 
 pgmnega: $(nega)
 	$(CC) -o $@ $^ $(CFLAGS) 
+
+pgmlbp: $(lbp)
+	$(CC) -o $@ $^ $(CFLAGS)
 
 pgmrotacao: $(rota)
 	$(CC) -o $@ $^ $(CFLAGS) 
@@ -24,4 +31,4 @@ clean:
 
 purge: 
 
-	rm pgmrotacao pgmnega 
+	rm pgmrotacao pgmnega pgmlbp
