@@ -38,6 +38,8 @@ int main (int argc, char **argv)
     img_pgm *img=malloc(sizeof(img_pgm)); //aloca um espaço de memoria para a matriz que ira receber a imagem
     parametros(img,entrada); //funcao que salva os parametros da imagem
     //efeito lbp
+    efeito(img);
+
     escreve_img(img,saida); //salva a nova imagem invertida
     libera_matriz(img);
 }
@@ -50,4 +52,31 @@ int verifica_valor(int a, int b)
         return 1;
     else 
         return 0;
+}
+
+void efeito(img_pgm *img)
+{
+    // passar por toda a matriz de 1 até tam-1 chamando a funcao calculo
+
+}
+
+void calculo(int indice, img_pgm *img)
+{
+    // alocacao para um espaço onde
+    //  serão calculados os efeitos
+    int matriz=(int *)malloc( 9* sizeof(int));
+    int matriz2=(int *)malloc( 9* sizeof(int));
+    
+    int i,j;
+    for (i=(indice -1); i<(indice +1) ; i++)
+    {
+        //fazer a subtração aqui e gerar 
+        // uma nova matriz para fazer os calculos
+
+    }
+
+
+    free(matriz);
+    free(matriz2);
+
 }

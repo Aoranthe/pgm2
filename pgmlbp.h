@@ -6,6 +6,7 @@
 #include "struct.h"
 
 int verifica_valor(int a, int b);
+void efeito(img_pgm *img);
 
 
 #endif 
