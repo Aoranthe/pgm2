@@ -68,20 +68,32 @@ void efeito(img_pgm *img)
 
 }
 
-void calculo(int indiceI, int indeceJ, img_pgm *img)
+void calculo(int indiceI, int indiceJ, img_pgm *img)
 {
-    // alocacao para um espaço onde
-    //  serão calculados os efeitos
-    int matriz=(int *)malloc( 9* sizeof(int));
-    // int matriz2=(int *)malloc( 9* sizeof(int));
-    
+    // variaveis utilizadas
+    int col=img->coluna;
     int i,j;
-    // for (i=(indice -1); i<(indice +1) ; i++)
-    {
-        //fazer a subtração aqui e gerar 
-        // uma nova matriz para fazer os calculos
 
-    }
+    // matriz contera os valores com 0 e 1
+    int matriz=(int *)malloc( 9* sizeof(int));
+    
+    // int matriz2=(int *)malloc( 9* sizeof(int));
+
+    // valor do meio da matriz 3x3
+    int meio=img->matriz[(indiceI * img->coluna) + indiceJ];
+
+    // for (i=(indiceI -1) ; i<(indiceI +1) ; i++)
+    // for (j=(indiceJ -1) ; j<(indiceJ +1) ; j++)
+    // {
+        // fazer a subtração aqui e gerar 
+    //    uma nova matriz para fazer os calculos
+        // if (img->matriz[(i * col) + j] != meio)
+        // {        
+            // matriz[(i * 3) + j]=verifica_valor(img->matriz[(i * col) + j], meio);
+// 
+        // }
+// 
+    // }
 
 
     free(matriz);
