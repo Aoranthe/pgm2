@@ -12,7 +12,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #define max 9
-#define lin 3
+#define lm 3
+#define cm 3
 
 int main (int argc, char **argv)
 {
@@ -42,6 +43,7 @@ int main (int argc, char **argv)
     //efeito lbp
     efeito(img);
 
+
     escreve_img(img,saida); //salva a nova imagem invertida
     libera_matriz(img);
 }
@@ -58,20 +60,47 @@ int verifica_valor(int a, int b)
 
 void efeito(img_pgm *img)
 {
-    int j, i, coluna, linha;
+    int j, i, c, l;
+    l=img->linha;
+    c=img->coluna;
+    //declaracao da matriz com os valores 0 e 1
+    int **m01=(int *)malloc(lm * sizeof(int*));
+    for (int i=0; i<lm; i++)
+        m01[i]=malloc(cm * sizeof(int));
+    //declaracao da matriz que recebera os valores de 2^n
+    //talvez nao precise disso
+    int **doisN=(int *)malloc(lm * sizeof(int*));
+    for (int i=0; i<lm; i++)
+        doisN[i]=malloc(cm * sizeof(int));
+    
+
     // passar por toda a matriz de 1 até tam-1 chamando a funcao calculo
-    linha=img->linha;
-    coluna=img->coluna;
-    for (i=1; i< (linha - 1); i++)
-    for (j=1; j< (coluna - 1); j++)
-    {
-        calculo(i,j, img);
+    for (i=1; i< (l- 1); i++)
+    for (j=1; j< (c- 1); j++)
+    { //recebe os valores 0 e 1
+        m01=calculo01(i,j, img);
+
     }
 
 }
 
-void calculo(int indiceI, int indiceJ, img_pgm *img)
+int calculo01(int indiceI, int indiceJ, img_pgm *img)
 {
-    
-    
+    //valor para o meio e os valores ao lado
+    int meio, val, i,j;
+    //alocacao da matriz
+    int **matriz01=(int *)malloc(lm * sizeof(int*));
+    for (int i=0; i<lm; i++)
+        matriz01[i]=malloc(cm * sizeof(int));
+
+    //laço para calcular os 0's e 1's
+    for (i=(indiceI-1); i< (indiceI+1); i++)
+    for (j=(indiceJ-1); j< (indiceJ+1); j++)
+    {
+        //salva o valor da matriz original
+        val=img->matriz[(indiceI * img->coluna)+indiceJ];
+        //calcula se é =0 ou =1
+        matriz01[i][j]=verifica_valor(val,meio);
+    }
+    return matriz01;
 }
