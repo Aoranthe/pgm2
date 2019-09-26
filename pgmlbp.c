@@ -48,7 +48,36 @@ int main (int argc, char **argv)
     libera_matriz(img);
 }
 
-// função utilizada para saber se o
+
+void efeito(img_pgm *img)
+{
+    int j, i, c, l;
+    l=img->linha;
+    c=img->coluna;
+    //declaracao da matriz com os valores 0 e 1
+    int **m=malloc(lm * sizeof(int*));
+    for (int i=0; i<lm; i++)
+        m[i]=malloc(cm * sizeof(int));
+    //declaracao da matriz que recebera os valores de 2^n
+    //talvez nao precise disso
+    int **doisN=malloc(lm * sizeof(int*));
+    for (int i=0; i<lm; i++)
+        doisN[i]=malloc(cm * sizeof(int));
+    
+
+    // passar por toda a matriz de 1 até tam-1 chamando a funcao calculo
+    for (i=1; i< (l- 1); i++)
+    for (j=1; j< (c- 1); j++)
+    { //recebe os valores 0 e 1
+        m[i][j]=calculo(i,j, img);
+        doisN=doisn();
+    }
+
+
+}
+
+
+
 //  valor do pixel sera maior ou menor que o valor do meio
 int verifica_valor(int a, int b)
 {
@@ -58,40 +87,16 @@ int verifica_valor(int a, int b)
         return 0;
 }
 
-void efeito(img_pgm *img)
-{
-    int j, i, c, l;
-    l=img->linha;
-    c=img->coluna;
-    //declaracao da matriz com os valores 0 e 1
-    int **m01=(int *)malloc(lm * sizeof(int*));
-    for (int i=0; i<lm; i++)
-        m01[i]=malloc(cm * sizeof(int));
-    //declaracao da matriz que recebera os valores de 2^n
-    //talvez nao precise disso
-    int **doisN=(int *)malloc(lm * sizeof(int*));
-    for (int i=0; i<lm; i++)
-        doisN[i]=malloc(cm * sizeof(int));
-    
-
-    // passar por toda a matriz de 1 até tam-1 chamando a funcao calculo
-    for (i=1; i< (l- 1); i++)
-    for (j=1; j< (c- 1); j++)
-    { //recebe os valores 0 e 1
-        m01=calculo01(i,j, img);
-
-    }
-
-}
-
-int calculo01(int indiceI, int indiceJ, img_pgm *img)
+//matriz com 0s e 1s
+int calculo(int indiceI, int indiceJ, img_pgm *img)
 {
     //valor para o meio e os valores ao lado
     int meio, val, i,j;
+    meio=img->matriz[(indiceI* img->coluna) + indiceJ];
     //alocacao da matriz
-    int **matriz01=(int *)malloc(lm * sizeof(int*));
+    int **matriz=malloc(lm * sizeof(int*));
     for (int i=0; i<lm; i++)
-        matriz01[i]=malloc(cm * sizeof(int));
+        matriz[i]=malloc(cm * sizeof(int));
 
     //laço para calcular os 0's e 1's
     for (i=(indiceI-1); i< (indiceI+1); i++)
@@ -100,7 +105,46 @@ int calculo01(int indiceI, int indiceJ, img_pgm *img)
         //salva o valor da matriz original
         val=img->matriz[(indiceI * img->coluna)+indiceJ];
         //calcula se é =0 ou =1
-        matriz01[i][j]=verifica_valor(val,meio);
+        matriz[i][j]=verifica_valor(val,meio);
     }
-    return matriz01;
+   
+    return matriz;
+}
+
+
+//matriz com 2^n
+int doisn()
+{
+    int **matriz=malloc(lm * sizeof(int*));
+    for (int i=0; i<lm; i++)
+        matriz[i]=malloc(cm * sizeof(int));
+    //variavel usanda para fazer 2^n
+    int n=0;
+    //laço para calcular 2^n
+    for (int i=0; i < 3; i++)
+    for (int j=0; j < 3; j++)
+    {
+        //para caso seja o valor do meio
+        if (j == i)
+            matriz[i][j]=0;
+        else 
+        {
+            matriz[i][j]=ldois(x);
+            n++;
+        }
+    }
+    return matriz;
+}
+
+//funcao para calcular 2^n 
+int ldois(int x)
+{
+    int a=2;
+    if (x==0)   return 1;
+    if (x==1)   return 2;
+
+    else    
+        for (int i=2; i < x; i++)
+            a=a*a;
+    return a;
 }
