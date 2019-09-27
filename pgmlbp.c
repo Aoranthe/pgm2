@@ -11,7 +11,6 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <unistd.h>
-#define max 9
 #define lm 3
 #define cm 3
 
@@ -42,8 +41,6 @@ int main (int argc, char **argv)
     parametros(img,entrada); //funcao que salva os parametros da imagem
     //efeito lbp
     efeito(img);
-
-
     escreve_img(img,saida); //salva a nova imagem invertida
     libera_matriz(img);
 }
@@ -58,13 +55,12 @@ void efeito(img_pgm *img)
     int **m=malloc(lm * sizeof(int*));
     for (int i=0; i<lm; i++)
         m[i]=malloc(cm * sizeof(int));
+
     //declaracao da matriz que recebera os valores de 2^n
-    //talvez nao precise disso
     int **doisN=malloc(lm * sizeof(int*));
     for (int i=0; i<lm; i++)
         doisN[i]=malloc(cm * sizeof(int));
     
-
     // passar por toda a matriz de 1 até tam-1 chamando a funcao calculo
     for (i=1; i< (l- 1); i++)
     for (j=1; j< (c- 1); j++)
