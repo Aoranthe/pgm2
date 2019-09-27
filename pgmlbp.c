@@ -71,28 +71,21 @@ void efeito(img_pgm *img)
     { //recebe os valores 0 e 1
         m[i][j]=calculo(i,j, img);
         doisN=doisn();
-        img->matriz[(i*img->coluna) + ]=multimatriz();
-
+        img->matriz[(i*img->coluna) +j]=multimatriz(m,doisN,img);
     }
-
-
+    free(m);
+    free(doisN);
 }
 
-int multimatriz(int **m, int **doisN, img *img)
+int multimatriz(int **m, int **doisN, img_pgm *img)
 {
-    int **result=malloc(lm * sizeof(int*));
-    for (int i=0; i<lm; i++)
-        result[i]=malloc(cm * sizeof(int));
+    //variavel recebera a soma de todos os valores
     int cont=0;
     //primeiro a multiplicacao entre as matrizes
     for (int i=0; i < 3; i++)
     for (int j=0; j < 3; j++)
-    {
-        if (i == j)
-            result[i][j]=cont;
-        result[i][j]=m[i][j]*doisN[i][j];
-        cont=m[i][j]*doisN[i][j]+cont;
-    }
+        cont=m[i][j]*doisN[i][j]+cont;   
+    return cont;
 }
 
 
@@ -147,7 +140,7 @@ int doisn()
             matriz[i][j]=0;
         else 
         {
-            matriz[i][j]=ldois(x);
+            matriz[i][j]=ldois(n);
             n++;
         }
     }
