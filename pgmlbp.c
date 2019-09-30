@@ -65,7 +65,7 @@ void efeito(img_pgm *img)
     for (i=1; i< (l- 1); i++)
     for (j=1; j< (c- 1); j++)
     { //recebe os valores 0 e 1
-        m[i][j]=calculo(i,j, img);
+        m=calculo(i,j, img);
         doisN=doisn();
         img->matriz[(i*img->coluna) +j]=multimatriz(m,doisN,img);
     }
@@ -99,7 +99,9 @@ int calculo(int indiceI, int indiceJ, img_pgm *img)
 {
     //valor para o meio e os valores ao lado
     int meio, val, i,j;
+
     meio=img->matriz[(indiceI* img->coluna) + indiceJ];
+    
     //alocacao da matriz
     int **matriz=malloc(lm * sizeof(int*));
     for (int i=0; i<lm; i++)
