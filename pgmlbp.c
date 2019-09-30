@@ -3,9 +3,9 @@
 
 
 #include "openimg.h"
-#include <stdlib.h>
 #include "struct.h"
 #include "pgmlbp.h"
+#include <stdlib.h>
 #include <string.h>
 #include <getopt.h>
 #include <ctype.h>
@@ -35,8 +35,8 @@ int main (int argc, char **argv)
             break;
         }
     }
+    // fazer um teste para saber se todos os parametros foram dados
      
-
     img_pgm *img=malloc(sizeof(img_pgm)); //aloca um espaço de memoria para a matriz que ira receber a imagem
     parametros(img,entrada); //funcao que salva os parametros da imagem
     //efeito lbp
@@ -55,21 +55,40 @@ void efeito(img_pgm *img)
     int **m=malloc(lm * sizeof(int*));
     for (int i=0; i<lm; i++)
         m[i]=malloc(cm * sizeof(int));
+    if (!m)
+    {
+        exit(-1);
+        printf("deu erro\n\n");
+    }
 
     //declaracao da matriz que recebera os valores de 2^n
-    int **doisN=malloc(lm * sizeof(int*));
+    int **doisN=(int **) malloc(lm * sizeof(int*));
     for (int i=0; i<lm; i++)
-        doisN[i]=malloc(cm * sizeof(int));
+        doisN[i]=(int *)malloc(cm * sizeof(int));
     
+     if (!doisN)
+    {
+        exit(-1);
+        printf("deu erro\n\n");
+    }
+
     // passar por toda a matriz de 1 até tam-1 chamando a funcao calculo
     for (i=1; i< (l- 1); i++)
     for (j=1; j< (c- 1); j++)
-    { //recebe os valores 0 e 1
-        m=calculo(i,j, img);
-        doisN=doisn();
+    { 
+        m=calculo(i,j, img, m);
+        doisN=doisn(doisN);
+        //recebe os valores 0 e 1
         img->matriz[(i*img->coluna) +j]=multimatriz(m,doisN,img);
     }
+
+    // liberacao da memoria utilizada
+    for (int i=0; i< lm; i++)
+        free(m[i]);
     free(m);
+
+    for (int i=0; i< lm; i++)
+        free(doisN[i]);
     free(doisN);
 }
 
@@ -95,17 +114,13 @@ int verifica_valor(int a, int b)
 }
 
 //matriz com 0s e 1s
-int calculo(int indiceI, int indiceJ, img_pgm *img)
+int** calculo(int indiceI, int indiceJ, img_pgm *img, int **matriz)
 {
     //valor para o meio e os valores ao lado
     int meio, val, i,j;
 
     meio=img->matriz[(indiceI* img->coluna) + indiceJ];
-    
-    //alocacao da matriz
-    int **matriz=malloc(lm * sizeof(int*));
-    for (int i=0; i<lm; i++)
-        matriz[i]=malloc(cm * sizeof(int));
+
 
     //laço para calcular os 0's e 1's
     for (i=(indiceI-1); i< (indiceI+1); i++)
@@ -122,11 +137,8 @@ int calculo(int indiceI, int indiceJ, img_pgm *img)
 
 
 //matriz com 2^n
-int doisn()
+int** doisn(int **matriz)
 {
-    int **matriz=malloc(lm * sizeof(int*));
-    for (int i=0; i<lm; i++)
-        matriz[i]=malloc(cm * sizeof(int));
     //variavel usanda para fazer 2^n
     int n=0;
     //laço para calcular 2^n
@@ -134,7 +146,7 @@ int doisn()
     for (int j=0; j < 3; j++)
     {
         //para caso seja o valor do meio
-        if (j == i)
+        if ((i==1)&&(j==1))
             matriz[i][j]=0;
         else 
         {
@@ -154,6 +166,7 @@ int ldois(int x)
 
     else    
         for (int i=2; i < x; i++)
-            a=a*a;
+            a*=2;
+        
     return a;
 }

@@ -6,6 +6,11 @@
 #include "struct.h"
 
 int verifica_valor(int a, int b);
+int ldois(int x);
+int multimatriz(int **m, int **doisN, img_pgm *img);
+int** doisn(int **matriz);
+int** calculo(int indiceI, int indiceJ, img_pgm *img, int **matriz);
+int verifica_valor(int a, int b);
 void efeito(img_pgm *img);
 
 
