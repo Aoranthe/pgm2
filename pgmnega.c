@@ -31,6 +31,10 @@ int main (int argc, char **argv)
             case 'o':
                 saida=optarg; //caso tenha a opção -o
             break;
+
+            default:
+            fprintf(stderr,"Entrada inválida.\n");
+            return (-1);
         }
     }
      

@@ -12,7 +12,7 @@ lbp = pgmlbp.o openimg.o
 %.o: %.c
 	$(CC) -c -o $@ $< $(CFLAGS) 
 
-all: pgmrotacao pgmnega
+all: pgmrotacao pgmnega pgmlbp
 
 pgmnega: $(nega)
 	$(CC) -o $@ $^ $(CFLAGS) 

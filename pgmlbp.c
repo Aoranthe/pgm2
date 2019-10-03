@@ -33,6 +33,10 @@ int main (int argc, char **argv)
             case 'o':
                 saida=optarg; //caso tenha a opção -o
             break;
+
+            default:
+            fprintf(stderr,"Entrada inválida.\n");
+            return (-1);
         }
     }
     // fazer um teste para saber se todos os parametros foram dados
@@ -58,7 +62,8 @@ void efeito(img_pgm *img)
     if (!m)
     {
         exit(-1);
-        printf("deu erro\n\n");
+        fprintf(stderr,"Não foi possível fazer a alocação da memória!\n");
+
     }
 
     //declaracao da matriz que recebera os valores de 2^n
@@ -66,10 +71,10 @@ void efeito(img_pgm *img)
     for (int i=0; i<lm; i++)
         doisN[i]=(int *)malloc(cm * sizeof(int));
     
-     if (!doisN)
+    if (!doisN)
     {
         exit(-1);
-        printf("deu erro\n\n");
+        fprintf(stderr,"Não foi possível fazer a alocação da memória!\n");
     }
 
     // passar por toda a matriz de 1 até tam-1 chamando a funcao calculo
@@ -83,13 +88,9 @@ void efeito(img_pgm *img)
     }
 
     // liberacao da memoria utilizada
-    for (int i=0; i< lm; i++)
-        free(m[i]);
-    free(m);
+    libera_matrizMenor(m);
+    libera_matrizMenor(doisN);
 
-    for (int i=0; i< lm; i++)
-        free(doisN[i]);
-    free(doisN);
 }
 
 int multimatriz(int **m, int **doisN, img_pgm *img)
@@ -107,7 +108,6 @@ int multimatriz(int **m, int **doisN, img_pgm *img)
 //  valor do pixel sera maior ou menor que o valor do meio
 int verifica_valor(int a, int b)
 {
-    printf("esse eh o val%i \n esse eh qq da matriz: %i \n",a,b);
     if (a >= b)
         return 1;
     else 
@@ -171,3 +171,4 @@ int ldois(int x)
         
     return a;
 }
+

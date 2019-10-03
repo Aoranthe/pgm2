@@ -41,7 +41,7 @@ int main ( int argc, char **argv)
 						angulo=atoi(optarg);
 				}
 			default:
-				fprintf(stderr, "valor invalido ou numero de parametros incorreto");
+				fprintf(stderr, "Entrada invalida.\n");
 				return -1;
 	    }
 	}

@@ -6,8 +6,7 @@
 #include <stdlib.h>
 #include "struct.h"
 #include "openimg.h"
-#define max 1024
-
+#define lm 3
 
 void parametros(img_pgm *img, char *nome)
 {
@@ -71,6 +70,12 @@ void libera_matriz(img_pgm *img)
     free(img->matriz);
 }
 
+void libera_matrizMenor(int **matriz)
+{
+    for (int i=0; i< lm; i++)
+        free(matriz[i]);
+    free(matriz);
+}
 
 /*aqui vai usar um valor que eu pego da linha de comando*/
 void escreve_img (img_pgm *img, char *saida)
