@@ -107,7 +107,8 @@ int multimatriz(int **m, int **doisN, img_pgm *img)
 //  valor do pixel sera maior ou menor que o valor do meio
 int verifica_valor(int a, int b)
 {
-    if (a > b)
+    printf("esse eh o val%i \n esse eh qq da matriz: %i \n",a,b);
+    if (a >= b)
         return 1;
     else 
         return 0;
@@ -123,11 +124,11 @@ int** calculo(int indiceI, int indiceJ, img_pgm *img, int **matriz)
 
 
     //laço para calcular os 0's e 1's
-    for (i=(indiceI-1); i< (indiceI+1); i++)
-    for (j=(indiceJ-1); j< (indiceJ+1); j++)
+    for (i=(indiceI-1); i< (indiceI+2); i++)
+    for (j=(indiceJ-1); j< (indiceJ+2); j++)
     {
         //salva o valor da matriz original
-        val=img->matriz[(indiceI * img->coluna)+indiceJ];
+        val=img->matriz[(i * img->coluna)+j];
         //calcula se é =0 ou =1
         matriz[i][j]=verifica_valor(val,meio);
     }
@@ -165,8 +166,8 @@ int ldois(int x)
     if (x==1)   return 2;
 
     else    
-        for (int i=2; i < x; i++)
-            a*=2;
+        for (int i=1; i < x; i++)
+            a=2*a;
         
     return a;
 }
