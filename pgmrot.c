@@ -46,14 +46,24 @@ int main ( int argc, char **argv)
 	    }
 	}
 
+	
     img_pgm *img=malloc(sizeof(img_pgm));
     parametros(img,entrada);
- 
+
+	
 	/*FAZER TODAS AS FUNÇÕES RELACIONADAS A ANGULOS*/
+	
+	// ver quem eh abcd da matriz original
+	// ver quem eh abcd na nova matriz
+	// calcular o tamanho da nova imagem baseada no desenho vermelho
+	rotacao();
+
     
 	escreve_img(img,saida);
     libera_matriz(img);
 }
 
+//px1[i]=cose*px[i]-seno*py[i]; //x
+//py1[i]=seno*px[i]+cose*py[i]; //y
 
-/************FUNCAO QUE CALCULA O ANGULO*****************/
+
