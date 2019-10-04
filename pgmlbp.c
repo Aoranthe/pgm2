@@ -13,6 +13,8 @@
 #include <unistd.h>
 #define lm 3
 #define cm 3
+#define vetor[9]
+#define vetor2[9]
 
 int main (int argc, char **argv)
 {
@@ -55,36 +57,37 @@ void efeito(img_pgm *img)
     int j, i, c, l;
     l=img->linha;
     c=img->coluna;
-    //declaracao da matriz com os valores 0 e 1
-    int **m=malloc(lm * sizeof(int*));
-    for (int i=0; i<lm; i++)
-        m[i]=malloc(cm * sizeof(int));
-    if (!m)
-    {
-        exit(-1);
-        fprintf(stderr,"Não foi possível fazer a alocação da memória!\n");
-
-    }
-
-    //declaracao da matriz que recebera os valores de 2^n
-    int **doisN=(int **) malloc(lm * sizeof(int*));
-    for (int i=0; i<lm; i++)
-        doisN[i]=(int *)malloc(cm * sizeof(int));
-    
-    if (!doisN)
-    {
-        exit(-1);
-        fprintf(stderr,"Não foi possível fazer a alocação da memória!\n");
-    }
+    ////declaracao da matriz com os valores 0 e 1
+    //int **m=malloc(lm * sizeof(int*));
+    //for (int i=0; i<lm; i++)
+    //    m[i]=malloc(cm * sizeof(int));
+    //if (!m)
+    //{
+    //    exit(-1);
+    //    fprintf(stderr,"Não foi possível fazer a alocação da memória!\n");
+//
+    //}
+//
+    ////declaracao da matriz que recebera os valores de 2^n
+    //int **doisN=(int **) malloc(lm * sizeof(int*));
+    //for (int i=0; i<lm; i++)
+    //    doisN[i]=(int *)malloc(cm * sizeof(int));
+    //
+    //if (!doisN)
+    //{
+    //    exit(-1);
+    //    fprintf(stderr,"Não foi possível fazer a alocação da memória!\n");
+    //}
 
     // passar por toda a matriz de 1 até tam-1 chamando a funcao calculo
     for (i=1; i< (l- 1); i++)
     for (j=1; j< (c- 1); j++)
     { 
-        m=calculo(i,j, img, m);
+        vetor=calculo(i,j, img, vetor);
+        //m=calculo(i,j, img, m);
         doisN=doisn(doisN);
         //recebe os valores 0 e 1
-        img->matriz[(i*img->coluna) +j]=multimatriz(m,doisN,img);
+        img->matriz[(i*img->coluna) +j]=multimatriz(vetor,doisN,img);
     }
 
     // liberacao da memoria utilizada
@@ -115,22 +118,24 @@ int verifica_valor(int a, int b)
 }
 
 //matriz com 0s e 1s
-int** calculo(int indiceI, int indiceJ, img_pgm *img, int **matriz)
+//int** calculo(int indiceI, int indiceJ, img_pgm *img, int **matriz)
+int calculo(int indiceI, int indiceJ, img_pgm *img, int matriz)
 {
     //valor para o meio e os valores ao lado
     int meio, val, i,j;
 
     meio=img->matriz[(indiceI* img->coluna) + indiceJ];
+    val=img->matriz[(indiceI * img->coluna)+ indiceJ];
 
 
     //laço para calcular os 0's e 1's
-    for (i=(indiceI-1); i< (indiceI+2); i++)
-    for (j=(indiceJ-1); j< (indiceJ+2); j++)
+    //for (i=(indiceI-1); i< (indiceI+2); i++)
+    //for (j=(indiceJ-1); j< (indiceJ+2); j++)
+    for (int i=0; i< 9; i++)
     {
         //salva o valor da matriz original
-        val=img->matriz[(i * img->coluna)+j];
         //calcula se é =0 ou =1
-        matriz[i][j]=verifica_valor(val,meio);
+        matriz[i]=verifica_valor(val,meio);
     }
    
     return matriz;
