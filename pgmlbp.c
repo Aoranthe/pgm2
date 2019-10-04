@@ -13,8 +13,7 @@
 #include <unistd.h>
 #define lm 3
 #define cm 3
-#define vetor[9]
-#define vetor2[9]
+
 
 int main (int argc, char **argv)
 {
@@ -57,53 +56,29 @@ void efeito(img_pgm *img)
     int j, i, c, l;
     l=img->linha;
     c=img->coluna;
-    ////declaracao da matriz com os valores 0 e 1
-    //int **m=malloc(lm * sizeof(int*));
-    //for (int i=0; i<lm; i++)
-    //    m[i]=malloc(cm * sizeof(int));
-    //if (!m)
-    //{
-    //    exit(-1);
-    //    fprintf(stderr,"Não foi possível fazer a alocação da memória!\n");
-//
-    //}
-//
-    ////declaracao da matriz que recebera os valores de 2^n
-    //int **doisN=(int **) malloc(lm * sizeof(int*));
-    //for (int i=0; i<lm; i++)
-    //    doisN[i]=(int *)malloc(cm * sizeof(int));
-    //
-    //if (!doisN)
-    //{
-    //    exit(-1);
-    //    fprintf(stderr,"Não foi possível fazer a alocação da memória!\n");
-    //}
+    int vetor[9];
+    int doisN[9];
 
     // passar por toda a matriz de 1 até tam-1 chamando a funcao calculo
     for (i=1; i< (l- 1); i++)
     for (j=1; j< (c- 1); j++)
     { 
-        vetor=calculo(i,j, img, vetor);
+        calculo(i,j, img, vetor);
         //m=calculo(i,j, img, m);
-        doisN=doisn(doisN);
+        doisn(doisN);
         //recebe os valores 0 e 1
         img->matriz[(i*img->coluna) +j]=multimatriz(vetor,doisN,img);
     }
 
-    // liberacao da memoria utilizada
-    libera_matrizMenor(m);
-    libera_matrizMenor(doisN);
 
 }
 
-int multimatriz(int **m, int **doisN, img_pgm *img)
+int multimatriz(int *m, int *doisN, img_pgm *img)
 {
     //variavel recebera a soma de todos os valores
     int cont=0;
-    //primeiro a multiplicacao entre as matrizes
-    for (int i=0; i < 3; i++)
-    for (int j=0; j < 3; j++)
-        cont=m[i][j]*doisN[i][j]+cont;   
+    for (int i=0; i<9; i++)
+        cont=m[i]*doisN[i]+cont;   
     return cont;
 }
 
@@ -119,10 +94,10 @@ int verifica_valor(int a, int b)
 
 //matriz com 0s e 1s
 //int** calculo(int indiceI, int indiceJ, img_pgm *img, int **matriz)
-int calculo(int indiceI, int indiceJ, img_pgm *img, int matriz)
+void calculo(int indiceI, int indiceJ, img_pgm *img, int *matriz)
 {
     //valor para o meio e os valores ao lado
-    int meio, val, i,j;
+    int meio, val, i;
 
     meio=img->matriz[(indiceI* img->coluna) + indiceJ];
     val=img->matriz[(indiceI * img->coluna)+ indiceJ];
@@ -131,36 +106,38 @@ int calculo(int indiceI, int indiceJ, img_pgm *img, int matriz)
     //laço para calcular os 0's e 1's
     //for (i=(indiceI-1); i< (indiceI+2); i++)
     //for (j=(indiceJ-1); j< (indiceJ+2); j++)
-    for (int i=0; i< 9; i++)
+    for (i=0; i< 9; i++)
     {
         //salva o valor da matriz original
         //calcula se é =0 ou =1
         matriz[i]=verifica_valor(val,meio);
     }
    
-    return matriz;
+    //return matriz;
 }
 
 
 //matriz com 2^n
-int** doisn(int **matriz)
+void doisn(int *matriz)
+//int** doisn(int **matriz)
 {
     //variavel usanda para fazer 2^n
     int n=0;
     //laço para calcular 2^n
-    for (int i=0; i < 3; i++)
-    for (int j=0; j < 3; j++)
+    //for (int i=0; i < 3; i++)
+    //for (int j=0; j < 3; j++)
+    for (int i=0; i<9; i++)
     {
         //para caso seja o valor do meio
-        if ((i==1)&&(j==1))
-            matriz[i][j]=0;
+        if (i==5)
+            matriz[i]=0;
         else 
         {
-            matriz[i][j]=ldois(n);
+            matriz[i]=ldois(n);
             n++;
         }
     }
-    return matriz;
+    //return matriz;
 }
 
 //funcao para calcular 2^n 
