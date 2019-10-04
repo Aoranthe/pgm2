@@ -13,7 +13,7 @@
 #include <unistd.h>
 #define lm 3
 #define cm 3
-
+#define indice(n,i,j) (n*i+j) //n é largura 
 
 int main (int argc, char **argv)
 {
@@ -97,20 +97,23 @@ int verifica_valor(int a, int b)
 void calculo(int indiceI, int indiceJ, img_pgm *img, int *matriz)
 {
     //valor para o meio e os valores ao lado
-    int meio, val, i;
-
+    int meio, val,k;
     meio=img->matriz[(indiceI* img->coluna) + indiceJ];
-    val=img->matriz[(indiceI * img->coluna)+ indiceJ];
-
+    // val=img->matriz[(indiceI * img->coluna)+ indiceJ];
+    k=0;
 
     //laço para calcular os 0's e 1's
     //for (i=(indiceI-1); i< (indiceI+2); i++)
     //for (j=(indiceJ-1); j< (indiceJ+2); j++)
-    for (i=0; i< 9; i++)
+    // for (i=0; i < 9; i++)
+    for (int i=(indiceI-1); i<(indiceI+2); i++)
+    for (int j=(indiceJ-1); j<(indiceJ+2); j++)
     {
+        val=img->matriz[indice(img->coluna,i,j)];
         //salva o valor da matriz original
         //calcula se é =0 ou =1
-        matriz[i]=verifica_valor(val,meio);
+        matriz[k]=verifica_valor(val,meio);
+        k++;
     }
    
     //return matriz;
