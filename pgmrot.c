@@ -53,8 +53,6 @@ int main ( int argc, char **argv)
 	
 	/*FAZER TODAS AS FUNÇÕES RELACIONADAS A ANGULOS*/
 	
-	// ver quem eh abcd da matriz original
-	// ver quem eh abcd na nova matriz
 	// calcular o tamanho da nova imagem baseada no desenho vermelho
 	rotacao();
 
@@ -62,6 +60,15 @@ int main ( int argc, char **argv)
 	escreve_img(img,saida);
     libera_matriz(img);
 }
+
+void rotacao(img_pgm *img)
+{
+	// ver quem eh abcd da matriz original
+	// ver quem eh abcd na nova matriz
+	
+
+}
+
 
 //px1[i]=cose*px[i]-seno*py[i]; //x
 //py1[i]=seno*px[i]+cose*py[i]; //y
