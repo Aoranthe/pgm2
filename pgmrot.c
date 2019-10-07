@@ -15,10 +15,9 @@
 #define pi 3.1415
 #define rad(a) ((a*pi)/180)
 
-int main ( int argc, char **argv)
+int main (int argc, char **argv)
 {	
 	int option, angulo;
-	// int *angulo=NULL;     
 	char *entrada=NULL;
 	char *saida=NULL;	
 	
@@ -36,13 +35,13 @@ int main ( int argc, char **argv)
 	        break;
 
 			case 'a': 
-				{	//caso n seja passado um valor
-					if (optarg==NULL)
-						angulo=90; 
-					 
-					else //converte para ser tratado como int
-						angulo=atoi(optarg);
-				}
+			{	//caso n seja passado um valor
+				if (optarg==NULL)
+					angulo=90; 
+				 
+				else //converte para ser tratado como int
+					angulo=atoi(optarg);
+			}
 			default:
 				fprintf(stderr, "Entrada invalida.\n");
 				return -1;
@@ -79,12 +78,16 @@ img_pgm *tamanho(img_pgm *img, int angulo)
 	//calculo pq é em radianos
 	float x=rad(angulo);
 
-	// calcula o novo angulo de cada coordenada d
+	// calcula o novo angulo de cada coordenada 
 	for (int i=0; i<tam; i++)
 	{
 		vl[i]=round((vlin[i] * cos(x)) - (vcol[i] * sin(x)));
 		vc[i]=round((vlin[i] * sin(x)) + (vcol[i] * cos(x)));
 	}
+
+	/*o maior e menor valor dira qual eh o novo tamamho da imagem*/
+
+	// fazer a diferença de do maior para ter os novos tamanhos
 
 
 // precisa retornar uma nova img alocada
