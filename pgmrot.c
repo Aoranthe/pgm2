@@ -11,6 +11,9 @@
 #include <ctype.h>
 #include <stdio.h>
 #include <unistd.h>
+#define tam 4
+#define pi 3.1415
+#define rad(a) ((a*pi)/180)
 
 int main ( int argc, char **argv)
 {	
@@ -50,27 +53,43 @@ int main ( int argc, char **argv)
     img_pgm *img=malloc(sizeof(img_pgm));
     parametros(img,entrada);
 
-	
 	/*FAZER TODAS AS FUNÇÕES RELACIONADAS A ANGULOS*/
 	
+	img_pgm *nova;
+	
+	// achar o novo tamanho da matriz
+	nova->matriz=tamanho(img,angulo);
 	// calcular o tamanho da nova imagem baseada no desenho vermelho
-	rotacao();
+	// rotacao();
 
     
 	escreve_img(img,saida);
     libera_matriz(img);
 }
 
-void rotacao(img_pgm *img)
-{
-	// ver quem eh abcd da matriz original
-	// ver quem eh abcd na nova matriz
+img_pgm *tamanho(img_pgm *img, int angulo)
+{	
+	int vlin[tam]={0,0,img->linha,img->coluna};
+	int vcol[tam]={0,img->coluna,0,img->linha};
 	
+	// ira salvos os novos angulos
+	int vl[tam];
+	int vc[tam];
+	
+	//calculo pq é em radianos
+	float x=rad(angulo);
 
+	// calcula o novo angulo de cada coordenada d
+	for (int i=0; i<tam; i++)
+	{
+		vl[i]=round((vlin[i] * cos(x)) - (vcol[i] * sin(x)));
+		vc[i]=round((vlin[i] * sin(x)) + (vcol[i] * cos(x)));
+	}
+
+
+// precisa retornar uma nova img alocada
 }
 
-
-//px1[i]=cose*px[i]-seno*py[i]; //x
-//py1[i]=seno*px[i]+cose*py[i]; //y
-
+// void rotacao(img_pgm *img)
+//rotacao conta feita x'=x*cos()-y*sin() e y'=x*sin()+y*cos()
 
