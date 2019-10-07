@@ -6,7 +6,7 @@
 #include "struct.h"
 
 int verifica_valor(int a, int b);
-int ldois(int x);
+
 int multimatriz(int *m, int *doisN, img_pgm *img);
 //int** doisn(int **matriz);
 void doisn(int *matriz)

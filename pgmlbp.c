@@ -7,6 +7,7 @@
 #include "pgmlbp.h"
 #include <stdlib.h>
 #include <string.h>
+#include <math.h>
 #include <getopt.h>
 #include <ctype.h>
 #include <stdio.h>
@@ -136,24 +137,11 @@ void doisn(int *matriz)
             matriz[i]=0;
         else 
         {
-            matriz[i]=ldois(n);
+            // matriz[i]=ldois(n);
+            matriz[i]=pow(2,n);
             n++;
         }
     }
     //return matriz;
-}
-
-//funcao para calcular 2^n 
-int ldois(int x)
-{
-    int a=2;
-    if (x==0)   return 1;
-    if (x==1)   return 2;
-
-    else    
-        for (int i=1; i < x; i++)
-            a=2*a;
-        
-    return a;
 }
 
