@@ -21,5 +21,7 @@ void escreve_img (img_pgm *img, char *saida);
 void ignora_comentario(FILE *pgm);
 //funcao que libera o espaço de uma matriz3x3
 void libera_matrizMenor(int **matriz);
+int compara (int a, int b);
+
 
 #endif

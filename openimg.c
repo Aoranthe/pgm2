@@ -122,3 +122,8 @@ void ignora_comentario(FILE *pgm)
     ungetc(lixo,pgm); //devolve o ultimo lido
           
 }
+
+int compara (int a, int b)
+{
+    return (a-b);
+}
