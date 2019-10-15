@@ -57,7 +57,7 @@ int main (int argc, char **argv)
 	
 	img_pgm *nova;	
 	// achar o novo tamanho da matriz
-	nova->matriz=tamanho(img,nova,angulo);
+	nova=tamanho(img,nova,angulo);
 
 	// nova->matriz=calloc(altura*largura, sizeof(int));
 	nova->matriz=calloc(nova->linha * nova->coluna, sizeof(int));
