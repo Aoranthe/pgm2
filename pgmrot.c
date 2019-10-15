@@ -22,7 +22,7 @@ int main (int argc, char **argv)
 	char *entrada=NULL;
 	char *saida=NULL;	
 	
-	while((option=getopt(argc,argv,"i:o:")) > 0)
+	while((option=getopt(argc,argv,"i:o:a:")) > 0)
 	{
 	    switch (option)
 	    {
@@ -43,9 +43,9 @@ int main (int argc, char **argv)
 				else //converte para ser tratado como int
 					angulo=atoi(optarg);
 			}
-			default:
-				fprintf(stderr, "Entrada invalida.\n");
-				return -1;
+			// default:
+				// fprintf(stderr, "Entrada invalida.\n");
+				// return -1;
 	    }
 	}
 
@@ -57,7 +57,8 @@ int main (int argc, char **argv)
 	
 	img_pgm *nova;	
 	// achar o novo tamanho da matriz
-	nova=tamanho(img,nova,angulo);
+	// nova=tamanho(img,nova,angulo);
+	tamanho(img,nova,angulo);
 
 	// nova->matriz=calloc(altura*largura, sizeof(int));
 	nova->matriz=calloc(nova->linha * nova->coluna, sizeof(int));
@@ -70,7 +71,7 @@ int main (int argc, char **argv)
     libera_matriz(img);
 }
 
-img_pgm *tamanho(img_pgm *img,img_pgm *nova ,int angulo)
+void tamanho(img_pgm *img,img_pgm *nova ,int angulo)
 {	
 	int altura, largura;
 	int vlin[tam]={0,0,img->linha,img->coluna};
@@ -99,14 +100,16 @@ img_pgm *tamanho(img_pgm *img,img_pgm *nova ,int angulo)
 
 	//diferença de x é a nova altura e de y é a nova largura
 	altura=vl[3]-vl[0];
+	printf("esse eh o valor da nova altura: %i\n", altura);
 	largura=vc[3]-vc[0];
+	printf("esse eh o valor da nova largura: %i\n", largura);
 
 	//aloca um espaço para a nova matriz rotacionada
 	nova->linha=altura;
 	nova->coluna=largura;
 	nova->cinza=img->cinza;
 
-	return nova;
+	// return nova;
 
 // precisa retornar uma nova img alocada
 }

@@ -7,7 +7,7 @@
 #include "struct.h"
 
 // funcao que acha o novo tamanho da imagem rotacionada
-img_pgm *tamanho(img_pgm *img,img_pgm *nova ,int angulo);
+void tamanho(img_pgm *img,img_pgm *nova ,int angulo);
 // funcao que rotaciona a nova imagem 
 void rotacao(img_pgm *img, img_pgm *nova, int angulo);
 
