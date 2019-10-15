@@ -6,6 +6,6 @@
 #define __pgmtot__
 #include "struct.h"
 
-int *tamanho(img_pgm *img,img_pgm *nova ,int angulo);
+img_pgm *tamanho(img_pgm *img,img_pgm *nova ,int angulo);
 
 #endif

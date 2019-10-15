@@ -70,7 +70,7 @@ int main (int argc, char **argv)
     libera_matriz(img);
 }
 
-int *tamanho(img_pgm *img,img_pgm *nova ,int angulo)
+img_pgm *tamanho(img_pgm *img,img_pgm *nova ,int angulo)
 {	
 	int altura, largura;
 	int vlin[tam]={0,0,img->linha,img->coluna};
