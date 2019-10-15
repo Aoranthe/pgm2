@@ -123,7 +123,13 @@ void ignora_comentario(FILE *pgm)
           
 }
 
-int compara (int a, int b)
+int compara (const void* a,const void* b)
 {
-    return (a-b);
+    int *pa, *pb;
+    pa = (int*)a;
+    pb = (int*)b;
+
+    if (*pa > *pb) return 1;
+    if (*pa < *pb) return -1;
+    return 0;
 }

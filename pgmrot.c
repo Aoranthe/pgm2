@@ -58,7 +58,12 @@ int main (int argc, char **argv)
 	img_pgm *nova;	
 	// achar o novo tamanho da matriz
 	nova->matriz=tamanho(img,nova,angulo);
-	// rotacao();
+
+	// nova->matriz=calloc(altura*largura, sizeof(int));
+	nova->matriz=calloc(nova->linha * nova->coluna, sizeof(int));
+
+	//função que ira calcular cada novo pixel
+	rotacao(img,nova,angulo);
 
     
 	escreve_img(img,saida);
@@ -97,20 +102,34 @@ int *tamanho(img_pgm *img,img_pgm *nova ,int angulo)
 	largura=vc[3]-vc[0];
 
 	//aloca um espaço para a nova matriz rotacionada
-	nova->matriz=calloc(altura*largura, sizeof(int));
 	nova->linha=altura;
 	nova->coluna=largura;
 	nova->cinza=img->cinza;
 
-	return nova->matriz;
+	return nova;
 
 // precisa retornar uma nova img alocada
 }
 
-void rotacao(img_pgm *img, img_pgm *nova)
+void rotacao(img_pgm *img, img_pgm *nova, int angulo)
 {
+	int x=rad(angulo);
+	// novas variaveis de indice
+	int indI, indJ;
+	
+	int c=img->coluna;
+	
 	for (int i=0; i<img->linha; i++)
 	for (int j=0; i<img->coluna; j++)
+	// o que eu recebo sao os indices rotacionados
+	{
+		// vl[i]=round((vlin[i] * cos(x)) - (vcol[i] * sin(x)));
+		indI=round((img->matriz[(i*c)+j] * cos(x)) - (img->matriz[(i*c)+j] * sin(x)));
+		// vc[i]=round((vlin[i] * sin(x)) + (vcol[i] * cos(x)));
+		indJ=round((img->matriz[(i*c)+j] * sin(x)) + (img->matriz[(i*c)+j] * cos(x)));
+		nova->matriz[(indI * nova->coluna) + indJ]= img->matriz[(i*img->coluna)+j];
+
+	}
 }
 //rotacao conta feita x'=x*cos()-y*sin() e y'=x*sin()+y*cos()
 

@@ -46,6 +46,7 @@ int main (int argc, char **argv)
     img_pgm *img=malloc(sizeof(img_pgm)); //aloca um espaço de memoria para a matriz que ira receber a imagem
     parametros(img,entrada); //funcao que salva os parametros da imagem
     //efeito lbp
+
     efeito(img);
     escreve_img(img,saida); //salva a nova imagem invertida
     libera_matriz(img);
@@ -65,7 +66,6 @@ void efeito(img_pgm *img)
     for (j=1; j< (c- 1); j++)
     { 
         calculo(i,j, img, vetor);
-        //m=calculo(i,j, img, m);
         doisn(doisN);
         //recebe os valores 0 e 1
         img->matriz[(i*img->coluna) +j]=multimatriz(vetor,doisN,img);
@@ -94,19 +94,14 @@ int verifica_valor(int a, int b)
 }
 
 //matriz com 0s e 1s
-//int** calculo(int indiceI, int indiceJ, img_pgm *img, int **matriz)
 void calculo(int indiceI, int indiceJ, img_pgm *img, int *matriz)
 {
     //valor para o meio e os valores ao lado
     int meio, val,k;
     meio=img->matriz[(indiceI* img->coluna) + indiceJ];
-    // val=img->matriz[(indiceI * img->coluna)+ indiceJ];
     k=0;
 
     //laço para calcular os 0's e 1's
-    //for (i=(indiceI-1); i< (indiceI+2); i++)
-    //for (j=(indiceJ-1); j< (indiceJ+2); j++)
-    // for (i=0; i < 9; i++)
     for (int i=(indiceI-1); i<(indiceI+2); i++)
     for (int j=(indiceJ-1); j<(indiceJ+2); j++)
     {
@@ -117,19 +112,14 @@ void calculo(int indiceI, int indiceJ, img_pgm *img, int *matriz)
         k++;
     }
    
-    //return matriz;
 }
 
 
 //matriz com 2^n
 void doisn(int *matriz)
-//int** doisn(int **matriz)
 {
     //variavel usanda para fazer 2^n
     int n=0;
-    //laço para calcular 2^n
-    //for (int i=0; i < 3; i++)
-    //for (int j=0; j < 3; j++)
     for (int i=0; i<9; i++)
     {
         //para caso seja o valor do meio
@@ -137,11 +127,9 @@ void doisn(int *matriz)
             matriz[i]=0;
         else 
         {
-            // matriz[i]=ldois(n);
             matriz[i]=pow(2,n);
             n++;
         }
     }
-    //return matriz;
 }
 
